@@ -91,7 +91,7 @@ export default {
                 flex: 1;
             }
             &:last-child {
-                border-bottom:  0;
+                border-bottom: 0;
             }
         }
     }
