@@ -13,6 +13,7 @@
             <label for="" class="input_label">
                 <p>面试时间</p>
                 <input type="text" placeholder="请输入公司名称">
+                <span class="icon iconfont">&#xe636;</span>
             </label>
             <label for="" class="input_label">
                 <p>面试地址</p>
@@ -27,6 +28,7 @@
     </div>
 </template>
 <script>
+import "../../../font/iconfont.css";
 export default {
     props:{
 
@@ -66,7 +68,7 @@ export default {
     .header {
         width: 100%;
         height: 88rpx;
-        background: #ccc;
+        background: #f6f6f6;
         line-height: 88rpx;
         padding: 0 30rpx;
         font-size: 36rpx;
@@ -78,7 +80,7 @@ export default {
             border-bottom: 1px solid #ccc;
             display: flex;
             height: 92rpx;
-            line-height: 92rpx;
+            align-items: center;
             overflow: hidden;
             p {
                 color: #ccc;
@@ -86,6 +88,10 @@ export default {
             }
             input {
                 height: 100%;
+                flex: 1;
+            }
+            &:last-child {
+                border-bottom:  0;
             }
         }
     }
@@ -94,7 +100,7 @@ export default {
         .footer_header {
             width: 100%;
             height: 88rpx;
-            background: #ccc;
+            background: #f6f6f6;
             line-height: 88rpx;
             padding: 0 30rpx;
             font-size: 36rpx;
@@ -108,7 +114,18 @@ export default {
         }
     }
     .confirm {
-        background: #666;
+        background: #999999;
         color: #fff;
+    }
+    .icon {
+        width: 50rpx;
+        height: 50rpx;
+        background: #197dbf;
+        border-radius: 50%;
+        display: inline-block;
+        line-height: 50rpx;
+        text-align: center;
+        color: #fff;
+        font-size: 36rpx;
     }
 </style>
