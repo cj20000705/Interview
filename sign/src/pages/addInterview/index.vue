@@ -4,7 +4,7 @@
         <section class="main">
             <label for="" class="input_label">
                 <p>公司名称</p>
-                <input type="text" placeholder="请输入公司名称">
+                <input type="text" placeholder="请输入公司名称" v-model="firmName">
             </label>
             <label for="" class="input_label">
                 <p>公司电话</p>
@@ -13,9 +13,9 @@
             <label for="" class="input_label">
                 <p>面试时间</p>
                 <input type="text" placeholder="请输入公司名称">
-                <span class="icon iconfont">&#xe636;</span>
+                <span class="icon iconfont" @click='iconBtn'>&#xe636;</span>
             </label>
-            <label for="" class="input_label">
+            <label for="" class="input_label" @click='interviewAddress'>
                 <p>面试地址</p>
                 <input type="text" placeholder="请选择面试地址">
             </label>
@@ -38,25 +38,41 @@ export default {
     },
     data(){
         return {
-
+            firmName:''
         }
     },
     computed:{
 
     },
     methods:{
+        //确定按钮
         clickShow() {
+          let that = this
           wx.showModal({
             title: '温馨提示',
             content: '添加面试成功',
             success (res) {
             if (res.confirm) {
-                console.log('用户点击确定')
+                console.log('用户点击确定',that.firmName)
             } else if (res.cancel) {
                 console.log('用户点击取消')
             }
           }
         })
+      },
+      //icon提示
+      iconBtn() {
+          wx.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 2000
+        })
+      },
+      //点击跳转添加地址
+      interviewAddress() {
+          wx.navigateTo({
+              url:"/pages/interviewAddress/main",
+          })
       }
     },
     created(){

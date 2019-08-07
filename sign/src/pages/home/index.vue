@@ -1,14 +1,19 @@
 <template>
   <div class="wrap">
-    <map 
+   <section class="main">
+      <map 
       id="map"
       show-location
       :markers="markers"
       :longitude="longitude"
       :latitude="latitude"
       style="width: 100%; height: 100%;"
-    ></map>
-    <span class="icon iconfont" @click='location'>&#xe6c6;</span>
+      ></map>
+      <span class="icon iconfont" @click='location'>&#xe6c6;</span>
+      <footer class="footer">
+        <span>添加面试</span>
+      </footer>
+    </section>
   </div>
 </template>
 <script>
@@ -46,13 +51,27 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.main {
+  width: 100%;
+  height: 100%;
+}
 .icon {
   position: fixed;
-  bottom: 30rpx;
+  bottom: 120rpx;
   left: 30rpx;
   background: blue;
   font-size: 80rpx;
   color: #fff;
   border-radius: 50%;
+}
+.footer {
+  width: 100%;
+  height: 88rpx;
+  background: black;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  line-height: 88rpx;
 }
 </style>
