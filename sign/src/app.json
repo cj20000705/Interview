@@ -1,9 +1,9 @@
 {
-  "pages": ["pages/interviewDetail/main","pages/addInterview/main","pages/index/main", "pages/counter/main"],
+  "pages": ["pages/home/main","pages/interviewDetail/main","pages/addInterview/main"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "首页",
     "navigationBarTextStyle": "black"
   }
 }
