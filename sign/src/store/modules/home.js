@@ -5,7 +5,7 @@ const state = {
 };
 //同步
 const mutations = {
-  updateLocation(state, payload) { 
+  updateLocation(state, payload) {
     state.longitude = payload.longitude;
     state.latitude = payload.latitude;
   }
@@ -14,9 +14,7 @@ const mutations = {
 const actions = {
   getLocation({ commit }, payload) {
     wx.getLocation({
-      type: "wgs84",
-      success(res) {
-        console.log("res11...", res);
+      success(res) { 
         commit("updateLocation", res);
       }
     });

@@ -28,6 +28,7 @@
 
 <script>
 import "../../../font/iconfont.css";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {};

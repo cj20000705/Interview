@@ -6,30 +6,17 @@
       <li>已放弃</li>
       <li>全部</li>
     </ul>
-    <div class="myinterviewBox">
+    <div class="myinterviewBox" v-for="(item,index) in list" :key="index">
       <div class="myinterviewBoxFirst">
-        <h3>鸟巢</h3>
+        <h3>{{item.company}}</h3>
         <!-- <span class="grays">未开始</span> -->
         <span class="blues">未提醒</span>
       </div>
-      <div class="myinterviewBoxtMiddle">北京市朝阳区国家体育场南路1号</div>
+      <div class="myinterviewBoxtMiddle"></div>
       <div class="myinterviewBoxBotton">
         <h3>面试时间:2019-07-20 20:20</h3>
         <!-- <span class="pinks">未提醒</span> -->
         <span class="blues">已打卡</span>
-      </div>
-    </div>
-    <div class="myinterviewBox">
-      <div class="myinterviewBoxFirst">
-        <h3>鸟巢</h3>
-        <span class="grays">未开始</span>
-        <!-- <span class="blues">未提醒</span> -->
-      </div>
-      <div class="myinterviewBoxtMiddle">北京市朝阳区国家体育场南路1号</div>
-      <div class="myinterviewBoxBotton">
-        <h3>面试时间:2019-07-20 20:20</h3>
-        <span class="pinks">未提醒</span>
-        <!-- <span class="blues">已打卡</span> -->
       </div>
     </div>
   </div>
@@ -37,13 +24,27 @@
 
 <script>
 import "../../../font/iconfont.css";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {};
   },
+  computed: {
+    ...mapState({
+      list: state => state.Interview.list
+    })
+  },
   components: {},
-  methods: {},
-  created() {}
+  methods: {
+    ...mapActions({
+      signList: "Interview/getsignList"
+    })
+  },
+  created() {},
+  mounted() {
+    this.signList();
+    console.log("list", this.list);
+  }
 };
 </script>
 <style lang="scss" scoped>

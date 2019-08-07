@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/myinterview/main",
     "pages/home/main", 
-    "pages/mine/main", 
-    "pages/myinterview/main"
+    "pages/mine/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
