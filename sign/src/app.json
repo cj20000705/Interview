@@ -1,14 +1,13 @@
 {
   "pages": [
-    "pages/myinterview/main",
-    "pages/mine/main",
-    "pages/index/main",
-    "pages/counter/main"
+    "pages/home/main", 
+    "pages/mine/main", 
+    "pages/myinterview/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "个人中心",
+    "navigationBarTitleText": "一面而就",
     "navigationBarTextStyle": "black"
   }
 }

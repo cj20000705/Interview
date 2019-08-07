@@ -80,8 +80,8 @@ export default {
   padding: 18rpx;
   box-sizing: border-box;
   h3 {
-    font-weight: 600;
-    font-size: 40rpx;
+    font-weight: 500;
+    font-size: 44rpx;
   }
   .grays {
     font-size: 34rpx;

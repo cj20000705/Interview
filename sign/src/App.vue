@@ -3,6 +3,7 @@ import { login } from "@/service/";
 
 export default {
   created() {
+    console.log(this.$store);
     // 调用API从本地缓存中获取数据
     /*
      * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
@@ -33,6 +34,10 @@ page {
   width: 100%;
   height: 100%;
 }
+page > view {
+  width: 100%;
+  height: 100%;
+}
 .container {
   height: 100%;
   display: flex;
@@ -46,7 +51,7 @@ page {
 * {
   width: 100%;
   height: 100%;
-  list-style: none; 
+  list-style: none;
   transition: width 2s;
   -moz-transition: width 2s;
   -webkit-transition: width 2s;

@@ -35,10 +35,9 @@ export default {
   components: {},
   methods: {
     myinterviews() {
-     
       wx.navigateTo({
         url: "/pages/myinterview/main"
-      }); 
+      });
     }
   },
   created() {}
