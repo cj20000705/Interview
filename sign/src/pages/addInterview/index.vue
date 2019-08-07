@@ -23,7 +23,7 @@
         <footer class="footer">
             <div class="footer_header">备注信息</div>
             <textarea name="" id="" cols="30" rows="10" class="text" placeholder="备注信息（可选，100个字以内）"></textarea>
-            <button class="confirm">确认</button>
+            <button class="confirm" @click='clickShow'>确认</button>
         </footer>
     </div>
 </template>
@@ -45,10 +45,22 @@ export default {
 
     },
     methods:{
-
+        clickShow() {
+          wx.showModal({
+            title: '温馨提示',
+            content: '添加面试成功',
+            success (res) {
+            if (res.confirm) {
+                console.log('用户点击确定')
+            } else if (res.cancel) {
+                console.log('用户点击取消')
+            }
+          }
+        })
+      }
     },
     created(){
-
+       
     },
     mounted(){
 
@@ -74,7 +86,6 @@ export default {
         font-size: 36rpx;
     }
     .main {
-        flex: 1;
         padding: 0 30rpx;
         .input_label {
             border-bottom: 1px solid #ccc;

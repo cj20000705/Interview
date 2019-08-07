@@ -1,5 +1,5 @@
 {
-  "pages": ["pages/interviewState/main","pages/home/main","pages/interviewDetail/main","pages/addInterview/main"],
+  "pages": ["pages/home/main","pages/addInterview/main","pages/interviewDetail/main","pages/interviewState/main"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
