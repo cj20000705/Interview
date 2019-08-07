@@ -2,29 +2,19 @@
     <div class="wrap">
         <header class="header">
             <span>北京</span>
-            <div><input type="text" placeholder="面试地址"></div>
+            <div><input type="text" placeholder="面试地址" v-model='changeInput' @input="changInput"></div>
         </header>
         <section class="main">
             <ul>
-                <li>
+                <li 
+                v-for="item in addressList" 
+                :key="item.id"
+                @click='clickBtn(item.address)'
+                >
                     <span class="icon iconfont">&#xe647;</span>
                     <div>
-                        <p>八大公元初</p>
-                        <span>北京市实景删除去出9号路</span>
-                    </div>
-                </li>
-                 <li>
-                    <span class="icon iconfont">&#xe647;</span>
-                    <div>
-                        <p>八大公元初</p>
-                        <span>北京市实景删除去出9号路</span>
-                    </div>
-                </li>
-                 <li>
-                    <span class="icon iconfont">&#xe647;</span>
-                    <div>
-                        <p>八大公元初</p>
-                        <span>北京市实景删除去出9号路</span>
+                        <p>{{item.title}}</p>
+                        <span>{{item.address}}</span>
                     </div>
                 </li>
             </ul>
@@ -33,6 +23,8 @@
 </template>
 <script>
 import "../../../font/iconfont.css";
+import { mapState , mapActions , mapMutations } from 'vuex'
+import throttle from '@/utils/debounce'
 export default {
     props:{
 
@@ -42,20 +34,34 @@ export default {
     },
     data(){
         return {
-
+            changeInput:'',
         }
     },
     computed:{
-
+        ...mapState({
+            addressList:state => state.address.addressList,
+        }),
     },
     methods:{
-
+        ...mapActions({
+            getSuggestion:'address/getSuggestion',
+        }),
+        ...mapMutations('address',['upgetAddres']),
+        changInput() {
+            throttle(() => this.getSuggestion(this.changeInput), 1000);
+        },
+        clickBtn(item) {
+            this.upgetAddres(item)
+            wx.navigateBack({
+               delta: 1
+            })
+        }
     },
     created(){
-
+        this.getSuggestion;
     },
     mounted(){
-
+        
     }
 }
 </script>
@@ -93,6 +99,7 @@ export default {
 }
 .main {
     flex:1;
+    overflow-y: auto;
     ul {
         li {
             display: flex;

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/interviewAddress/main",
     "pages/addInterview/main",
+    "pages/interviewAddress/main",
     "pages/home/main",
     "pages/interviewDetail/main",
     "pages/interviewState/main"

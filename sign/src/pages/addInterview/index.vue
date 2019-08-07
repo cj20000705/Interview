@@ -17,7 +17,7 @@
             </label>
             <label for="" class="input_label" @click='interviewAddress'>
                 <p>面试地址</p>
-                <input type="text" placeholder="请选择面试地址">
+                <input type="text" placeholder="请选择面试地址" :value='addres'>
             </label>
         </section>
         <footer class="footer">
@@ -29,6 +29,7 @@
 </template>
 <script>
 import "../../../font/iconfont.css";
+import {mapState} from 'vuex'
 export default {
     props:{
 
@@ -42,7 +43,9 @@ export default {
         }
     },
     computed:{
-
+        ...mapState({
+            addres:state => state.address.addres,            
+        })
     },
     methods:{
         //确定按钮
@@ -76,10 +79,10 @@ export default {
       }
     },
     created(){
-       
+
     },
     mounted(){
-
+       console.log(this.addres)
     }
 }
 </script>

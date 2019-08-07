@@ -46,7 +46,7 @@ export default {
     console.log(this.latitude)
   },
   mounted(){
-
+    
   }
 }
 </script>
