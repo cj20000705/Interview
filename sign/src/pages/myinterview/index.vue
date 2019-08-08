@@ -1,23 +1,31 @@
 <template>
   <div class="myinterviewWrap">
     <ul class="myinterviewLis">
-      <li class="active">未开始</li>
-      <li>已打卡</li>
-      <li>已放弃</li>
-      <li>全部</li>
+      <li
+        v-for="(item,index) in tabList"
+        :class="{'active':index==ind}"
+        :key="item.id"
+        @click="tabClass({index,status:item.status})"
+      >{{item.title}}</li>
     </ul>
-    <div class="myinterviewBox" v-for="(item,index) in list" :key="index"  >
-      <div class="myinterviewBoxFirst">
-        <h3>{{item.company}}</h3>
-        <!-- <span class="grays">未开始</span> -->
-        <span class="blues">未提醒</span>
+    <div class="myinterviewBox">
+      <div v-if="list.length>0">
+        <div v-for="(item,index) in list" :key="index" @click="myinterviewDetail(item.id)">
+          <div class="myinterviewBoxFirst">
+            <h3>{{item.company}}</h3>
+            <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
+          </div>
+          <div class="myinterviewBoxtMiddle">
+            <p>{{item.address }}</p>
+          </div>
+          <div class="myinterviewBoxBotton">
+            <h3>面试时间:{{item.start_time}}</h3>
+            <!-- -1表示未提醒，0表示已提醒 -->
+            <span :class="{grays:item.status === 1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
+          </div>
+        </div>
       </div>
-      <div class="myinterviewBoxtMiddle"></div>
-      <div class="myinterviewBoxBotton">
-        <h3>面试时间:2019-07-20 20:20</h3>
-        <!-- <span class="pinks">未提醒</span> -->
-        <span class="blues">已打卡</span>
-      </div>
+      <div v-else class="nomyinterview">当前分类还没有面试!</div>
     </div>
   </div>
 </template>
@@ -27,31 +35,70 @@ import "../../../font/iconfont.css";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      ind: 0,
+      page: 1,
+      pageSize: 6,
+      gotoStatus: -1
+    };
   },
   computed: {
     ...mapState({
-      list: state => state.Interview.list
-    })
+      list: state => state.Interview.list,
+      tabList: state => state.Interview.tabList
+    }),
+    //判断state  -1表示未开始，0表示已打卡，1表示已放弃
+    status() {
+      let str = "";
+      this.list.forEach(item => {
+        if (item.status === -1) {
+          str = "未开始";
+        } else if (item.status === 1) {
+          str = "已放弃";
+        } else {
+          str = "已打卡";
+        }
+      });
+      return str;
+    }
   },
-  components: {},
   methods: {
     ...mapActions({
       signList: "Interview/getsignList"
-    })
-
+    }),
+    myinterviewDetail: id => {
+      const url = "/pages/myinterviewDetails/main?id=" + id;
+      console.log(url);
+      mpvue.navigateTo({ url });
+    },
+    tabClass(payload) {
+      this.ind = payload.index;
+      this.page = 1;
+      this.gotoStatus = payload.status;
+      this.signList({
+        status: payload.status,
+        page: this.page,
+        pageSize: this.pageSize
+      });
+    }
   },
-  created() {},
+  //刚进来页面的显示
+  onShow() {
+    this.signList({ status: -1, page: this.page, pageSize: this.pageSize });
+  },
+  created() {
+    
+  },
   mounted() {
     this.signList();
-    console.log("list", this.list);
+    console.log("list======", this.list.length);
   }
 };
 </script>
 <style lang="scss" scoped>
 .myinterviewWrap {
   width: 100%;
-  height: 100%;
+  height: auto;
   background: #eeee;
   .myinterviewLis {
     width: 100%;
@@ -72,15 +119,23 @@ export default {
 }
 .myinterviewBox {
   width: 100%;
-  height: 260rpx;
+  height: 300rpx;
   background: #fff;
   margin-top: 20rpx;
+  .nomyinterview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 }
 .myinterviewBoxFirst {
   display: flex;
   justify-content: space-between;
-  padding: 18rpx;
+  padding: 40rpx 20rpx;
   box-sizing: border-box;
+
   h3 {
     font-weight: 500;
     font-size: 44rpx;
@@ -88,9 +143,9 @@ export default {
   .grays {
     font-size: 34rpx;
     padding: 8rpx 16rpx;
-    border: solid 1px #f4f4f5;
-    color: #9d93b1;
-    background: #f4f4f5;
+    border: solid 1px #cae4ff;
+    color: red;
+    background: #ecf5ff;
   }
   .blues {
     font-size: 34rpx;
@@ -98,6 +153,13 @@ export default {
     border: solid 1px #cae4ff;
     color: #409eff;
     background: #ecf5ff;
+  }
+  .pinks {
+    font-size: 34rpx;
+    padding: 8rpx 16rpx;
+    border: solid 1px #fef0f0;
+    color: #f56c6c;
+    background: #fef0f0;
   }
 }
 .myinterviewBoxtMiddle {
@@ -114,19 +176,19 @@ export default {
   margin-top: 20rpx;
   display: flex;
   justify-content: space-between;
-  .pinks {
+  span {
     font-size: 34rpx;
-    padding: 12rpx 22rpx;
-    border: solid 1px #fef0f0;
-    color: #f56c6c;
-    background: #fef0f0;
-  }
-  .blues {
-    font-size: 34rpx;
-    padding: 12rpx 22rpx;
+    padding: 8rpx 16rpx;
     border: solid 1px #cae4ff;
     color: #409eff;
     background: #ecf5ff;
+  }
+  .grays {
+    font-size: 34rpx;
+    padding: 12rpx 20rpx;
+    border: solid 1px #f4f4f5;
+    color: #9d93b1;
+    background: #f4f4f5;
   }
 }
 </style>

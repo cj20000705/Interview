@@ -13,7 +13,7 @@ const state = {
 const mutations = {};
 //异步
 const actions = {
-  getSuggestion({ commit }, payload) {
+  getSuggestion({ commit }, payload) { 
     qqMapSdk.getSuggestion({
       keyword: payload,
       success: res => {
