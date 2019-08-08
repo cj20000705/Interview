@@ -49,4 +49,7 @@ page > view {
   -webkit-transition: width 2s;
   -o-transition: width 2s;
 }
+page , page>view {
+  height: 100%;
+}
 </style>

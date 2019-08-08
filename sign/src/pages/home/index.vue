@@ -15,7 +15,7 @@
     <div class="portrait" @click="gotoMine">
       <span class="icon iconfont">&#xe678;</span>
     </div>
-    <div class="addInterview">添加面试</div>
+    <div class="addInterview" @click="gotoAddinterview">添加面试</div>
   </div>
 </template>
 
@@ -43,6 +43,11 @@ export default {
     gotoMine() {
       wx.navigateTo({
         url: "/pages/mine/main"
+      });
+    },
+    gotoAddinterview() {
+       wx.navigateTo({
+        url: "/pages/addInterview/main"
       });
     }
   },
