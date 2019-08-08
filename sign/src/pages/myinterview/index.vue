@@ -6,7 +6,7 @@
       <li>已放弃</li>
       <li>全部</li>
     </ul>
-    <div class="myinterviewBox" v-for="(item,index) in list" :key="index">
+    <div class="myinterviewBox" v-for="(item,index) in list" :key="index"  >
       <div class="myinterviewBoxFirst">
         <h3>{{item.company}}</h3>
         <!-- <span class="grays">未开始</span> -->
@@ -39,6 +39,7 @@ export default {
     ...mapActions({
       signList: "Interview/getsignList"
     })
+
   },
   created() {},
   mounted() {
