@@ -10,6 +10,5 @@ export let signDetail = id => {
 };
 //添加面试
 export let addInterview = (params) => {
-  console.log(params)
-  return fly.post('/sign')
+  return fly.post('/sign',params)
 }

@@ -9,7 +9,7 @@
                 <li 
                 v-for="item in addressList" 
                 :key="item.id"
-                @click='clickBtn(item.address)'
+                @click='clickBtn(item)'
                 >
                     <span class="icon iconfont">&#xe647;</span>
                     <div>

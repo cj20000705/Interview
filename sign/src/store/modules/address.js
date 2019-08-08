@@ -6,7 +6,7 @@ const qqMapSdk = new QQMapWX ({
 
 const state = {
     addressList:[],
-    addres:'面试地址'
+    addres:{}
 }
 //模块内的异步改变
 const actions = {
@@ -25,10 +25,12 @@ const mutations = {
     //搜索列表
     upgetSuggestion(state,payload) {
         state.addressList = payload
+        console.log(state.addressList,'addressList...')
     },
     //面试地址
     upgetAddres(state,payload) {
         state.addres = payload
+        console.log(state.addres,'addres...')
     }
 }
 

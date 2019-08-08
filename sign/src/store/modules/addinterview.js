@@ -4,7 +4,8 @@ const state = {
 }
 const actions = {
     async AddInterview({commit},payload) {
-        const data = await addInterview()
+        console.log(payload,'payload...')
+        const data = await addInterview(payload)
         console.log(data,'data...')
         commit('mutationsAddInterview',data)
     }
