@@ -1,15 +1,18 @@
 {
   "pages": [
+    "pages/home/main", 
     "pages/addInterview/main",
     "pages/interviewAddress/main",
-    "pages/home/main",
     "pages/interviewDetail/main",
-    "pages/interviewState/main"
+    "pages/interviewState/main",
+    
+    "pages/mine/main",
+    "pages/myinterview/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "首页",
+    "navigationBarTitleText": "一面而就",
     "navigationBarTextStyle": "black"
   }
 }
