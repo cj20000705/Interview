@@ -8,23 +8,24 @@
         @click="tabClass({index,status:item.status})"
       >{{item.title}}</li>
     </ul>
-    <div class="myinterviewBox" v-for="(item,index) in list" :key="index">
-      <!-- @click="myinterviewDetail(item.id)"   -->
-      <div class="myinterviewBoxFirst">
-        <h3>{{item.company}}</h3>
-        <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
-        <!-- <span class="grays">未开始</span> -->
-        <!-- <span class="blues">未提醒</span> -->
+    <div class="myinterviewBox">
+      <div v-if="list.length>0">
+        <div v-for="(item,index) in list" :key="index" @click="myinterviewDetail(item.id)">
+          <div class="myinterviewBoxFirst">
+            <h3>{{item.company}}</h3>
+            <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
+          </div>
+          <div class="myinterviewBoxtMiddle">
+            <p>{{item.address.address }}</p>
+          </div>
+          <div class="myinterviewBoxBotton">
+            <h3>面试时间:{{item.start_time}}</h3>
+            <!-- -1表示未提醒，0表示已提醒 -->
+            <span :class="{grays:item.status === 1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
+          </div>
+        </div>
       </div>
-      <div class="myinterviewBoxtMiddle">
-        <p>{{item.address.address }}</p>
-      </div>
-      <div class="myinterviewBoxBotton">
-        <h3>面试时间:{{item.start_time}}</h3>
-
-        <!-- -1表示未提醒，0表示已提醒 -->
-        <span :class="{grays:item.status === 1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
-      </div>
+      <div v-else class="nomyinterview">当前分类还没有面试!</div>
     </div>
   </div>
 </template>
@@ -65,11 +66,11 @@ export default {
     ...mapActions({
       signList: "Interview/getsignList"
     }),
-    // myinterviewDetail: id => {
-    //   const url = "/pages/myinterviewDetails/main?id=" + id;
-    //   console.log(url);
-    //   mpvue.navigateTo({ url });
-    // },
+    myinterviewDetail: id => {
+      const url = "/pages/myinterviewDetails/main?id=" + id;
+      console.log(url);
+      mpvue.navigateTo({ url });
+    },
     tabClass(payload) {
       this.ind = payload.index;
       this.page = 1;
@@ -88,7 +89,7 @@ export default {
   created() {},
   mounted() {
     this.signList();
-    console.log("list------", this.list);
+    console.log("list======", this.list.length);
   }
 };
 </script>
@@ -119,6 +120,13 @@ export default {
   height: 300rpx;
   background: #fff;
   margin-top: 20rpx;
+  .nomyinterview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 }
 .myinterviewBoxFirst {
   display: flex;
@@ -130,12 +138,11 @@ export default {
     font-weight: 500;
     font-size: 44rpx;
   }
-
   .grays {
     font-size: 34rpx;
     padding: 8rpx 16rpx;
     border: solid 1px #cae4ff;
-    color: #409eff;
+    color: red;
     background: #ecf5ff;
   }
   .blues {
@@ -167,12 +174,12 @@ export default {
   margin-top: 20rpx;
   display: flex;
   justify-content: space-between;
-  .pinks {
+  span {
     font-size: 34rpx;
     padding: 8rpx 16rpx;
-    border: solid 1px #fef0f0;
-    color: #f56c6c;
-    background: #fef0f0;
+    border: solid 1px #cae4ff;
+    color: #409eff;
+    background: #ecf5ff;
   }
   .grays {
     font-size: 34rpx;

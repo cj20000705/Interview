@@ -25,9 +25,6 @@ const state = {
 };
 //同步
 const mutations = {
-  // mutationsSignList(state, payload) {
-  //   state.list = payload;
-  // },
   mutationsSignDetail(state, payload) {
     state.detailList = payload;
     console.log("detail----", state.detailList);
