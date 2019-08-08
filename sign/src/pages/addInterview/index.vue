@@ -12,7 +12,11 @@
             </label>
             <label for="" class="input_label">
                 <p>面试时间</p>
-                <input type="text" placeholder="请输入公司名称">
+                <picker class="picker" mode="date" value="time" start="09:01" end="21:01" @change="bindTimeChange">
+                    <view class="picker">
+                        {{time}}
+                    </view>
+                </picker>
                 <span class="icon iconfont" @click='iconBtn'>&#xe636;</span>
             </label>
             <label for="" class="input_label" @click='interviewAddress'>
@@ -39,7 +43,8 @@ export default {
     },
     data(){
         return {
-            firmName:''
+            firmName:'',
+            time: new Date().toLocaleDateString().replace(/\//g,'-'),
         }
     },
     computed:{
@@ -76,7 +81,11 @@ export default {
           wx.navigateTo({
               url:"/pages/interviewAddress/main",
           })
-      }
+      },
+      //时间选择
+       bindTimeChange(e) {
+            this.time = e.mp.detail.value
+      },
     },
     created(){
 
@@ -123,6 +132,9 @@ export default {
             &:last-child {
                 border-bottom: 0;
             }
+            .picker {
+                flex: 1;
+            }
         }
     }
     .footer {
@@ -146,6 +158,7 @@ export default {
     .confirm {
         background: #999999;
         color: #fff;
+        border-radius: 0;
     }
     .icon {
         width: 50rpx;
