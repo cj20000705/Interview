@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/myinterview/main",
     "pages/home/main",
     "pages/addInterview/main",
     "pages/interviewAddress/main",
     "pages/interviewDetail/main",
     "pages/interviewState/main",
-    "pages/myinterview/main",
     "pages/myinterviewDetails/main",
     "pages/mine/main"
   ],
