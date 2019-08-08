@@ -46,7 +46,7 @@ export default {
       });
     },
     gotoAddinterview() {
-       wx.navigateTo({
+      wx.navigateTo({
         url: "/pages/addInterview/main"
       });
     }

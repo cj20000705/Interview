@@ -1,22 +1,29 @@
 <template>
   <div class="myinterviewWrap">
     <ul class="myinterviewLis">
-      <li class="active">未开始</li>
-      <li>已打卡</li>
-      <li>已放弃</li>
-      <li>全部</li>
+      <li
+        v-for="(item,index) in listTop"
+        :class="{'active':index==ind}"
+        :key="item.id"
+        @click="tabClass(index)"
+      >{{item.tit}}</li>
     </ul>
-    <div class="myinterviewBox" v-for="(item,index) in list" :key="index"  >
+    <div
+      class="myinterviewBox"
+      v-for="(item,index) in list"
+      :key="index"
+      @click="myinterviewDetail(item.id)"
+    >
       <div class="myinterviewBoxFirst">
         <h3>{{item.company}}</h3>
-        <!-- <span class="grays">未开始</span> -->
-        <span class="blues">未提醒</span>
+         <span class="grays">未开始</span> 
+        <!-- <span class="blues">未提醒</span> -->
       </div>
       <div class="myinterviewBoxtMiddle"></div>
       <div class="myinterviewBoxBotton">
         <h3>面试时间:2019-07-20 20:20</h3>
-        <!-- <span class="pinks">未提醒</span> -->
-        <span class="blues">已打卡</span>
+          <span class="pinks">未提醒</span> 
+        <!-- <span class="blues">已打卡</span> -->
       </div>
     </div>
   </div>
@@ -27,7 +34,27 @@ import "../../../font/iconfont.css";
 import { mapState, mapActions } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      listTop: [
+        {
+          tit: "未开始",
+          id: 1
+        },
+        {
+          tit: "已打卡",
+          id: 2
+        },
+        {
+          tit: "已放弃",
+          id: 3
+        },
+        {
+          tit: "全部",
+          id: 4
+        }
+      ],
+      ind: 0
+    };
   },
   computed: {
     ...mapState({
@@ -38,13 +65,19 @@ export default {
   methods: {
     ...mapActions({
       signList: "Interview/getsignList"
-    })
-
+    }),
+    myinterviewDetail: id => {
+      const url = "/pages/myinterviewDetails/main?id=" + id;
+      console.log(url);
+      mpvue.navigateTo({ url });
+    },
+    tabClass(ind) { 
+      this.ind = ind;
+    }
   },
   created() {},
   mounted() {
     this.signList();
-    console.log("list", this.list);
   }
 };
 </script>
@@ -79,8 +112,9 @@ export default {
 .myinterviewBoxFirst {
   display: flex;
   justify-content: space-between;
-  padding: 18rpx;
+  padding:40rpx 20rpx;
   box-sizing: border-box;
+
   h3 {
     font-weight: 500;
     font-size: 44rpx;

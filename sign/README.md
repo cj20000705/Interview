@@ -6,7 +6,7 @@
 主框架为小程序，结合vuex等运行。
 
 #3.项目运行 
-
+```
 ## 初始化项目 
 cd sign
 npm run dev
@@ -29,7 +29,7 @@ npm build:my
 ## 生成 bundle 分析报告
 npm run build --report
 For detailed explanation on how things work, checkout the guide and docs for vue-loader.
-
+```
 功能列表
 - [x] 定位功能
 - [x] 我的功能

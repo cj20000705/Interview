@@ -1,12 +1,13 @@
 {
-  "pages": [ 
-    "pages/home/main", 
+  "pages": [
+    "pages/home/main",
     "pages/addInterview/main",
     "pages/interviewAddress/main",
     "pages/interviewDetail/main",
-    "pages/interviewState/main", 
-    "pages/mine/main",
-    "pages/myinterview/main"
+    "pages/interviewState/main",
+    "pages/myinterview/main",
+    "pages/myinterviewDetails/main",
+    "pages/mine/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
