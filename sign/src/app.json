@@ -4,8 +4,7 @@
     "pages/addInterview/main",
     "pages/interviewAddress/main",
     "pages/interviewDetail/main",
-    "pages/interviewState/main",
-    
+    "pages/interviewState/main", 
     "pages/mine/main",
     "pages/myinterview/main"
   ],

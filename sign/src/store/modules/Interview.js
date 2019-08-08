@@ -3,7 +3,7 @@ import { signList } from "../../service";
 //所有模块内状态
 const state = {
   list: [],
-  detail:[]
+  detail: []
 };
 //同步
 const mutations = {
@@ -14,8 +14,8 @@ const mutations = {
 //异步
 const actions = {
   async getsignList({ commit }, payload) {
-    const data = await signList(); 
-   console.log('darra.....',data.data)
+    const data = await signList();
+    console.log("darra.....", data.data);
     commit("mutationsSignList", data.data);
   }
 };
