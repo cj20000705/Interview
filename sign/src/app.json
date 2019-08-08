@@ -1,6 +1,5 @@
 {
-  "pages": [
-    
+  "pages": [ 
     "pages/home/main", 
     "pages/mine/main",
     "pages/myinterview/main"
