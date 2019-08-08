@@ -8,3 +8,8 @@ export let signList = () => {
 export let signDetail = id => {
   return fly.get(`/sign/${id}`);
 };
+//添加面试
+export let addInterview = (params) => {
+  console.log(params)
+  return fly.post('/sign')
+}

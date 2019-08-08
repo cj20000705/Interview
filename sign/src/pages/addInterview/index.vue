@@ -8,7 +8,7 @@
             </label>
             <label for="" class="input_label">
                 <p>公司电话</p>
-                <input type="text" placeholder="请输入面试联系人电话">
+                <input type="text" placeholder="请输入面试联系人电话" v-model="phone">
             </label>
             <label for="" class="input_label">
                 <p>面试时间</p>
@@ -21,7 +21,8 @@
             </label>
             <label for="" class="input_label" @click='interviewAddress'>
                 <p>面试地址</p>
-                <input type="text" placeholder="请选择面试地址" :value='addres'>
+                <div class="addres">{{addres}}</div>
+                <!-- <input type="text" placeholder="请选择面试地址" :value='addres' v-model="interview"> -->
             </label>
         </section>
         <footer class="footer">
@@ -33,7 +34,7 @@
 </template>
 <script>
 import "../../../font/iconfont.css";
-import {mapState} from 'vuex'
+import { mapState , mapMutations , mapActions} from 'vuex'
 export default {
     props:{
 
@@ -44,6 +45,8 @@ export default {
     data(){
         return {
             firmName:'',
+            phone:'',
+            interview:'',
             time: new Date().toLocaleDateString().replace(/\//g,'-'),
         }
     },
@@ -53,15 +56,48 @@ export default {
         })
     },
     methods:{
+        ...mapMutations({
+            
+        }),
+        ...mapActions({
+            AddInterview:'addInterview/AddInterview'
+        }),
         //确定按钮
         clickShow() {
           let that = this
+          if(that.firmName === '') {
+              wx.showToast({
+                    title: '请填写公司名称',
+                    icon: 'none',
+                    duration: 2000
+              })
+              return
+          }
+          if(that.phone === '') {
+            wx.showToast({
+                    title: '请输入公司手机号',
+                    icon: 'none',
+                    duration: 2000
+              })
+              return 
+          }
+          switch (that.interview) {
+            case '':
+                wx.showToast({
+                    title: '请选择面试地址',
+                    icon: 'none',
+                    duration: 2000
+              })
+              return 
+            break;
+          }
           wx.showModal({
             title: '温馨提示',
             content: '添加面试成功',
             success (res) {
             if (res.confirm) {
                 console.log('用户点击确定',that.firmName)
+                console.log(that.AddInterview(),'addInterview...')
             } else if (res.cancel) {
                 console.log('用户点击取消')
             }
@@ -88,10 +124,10 @@ export default {
       },
     },
     created(){
-
+        
     },
     mounted(){
-       console.log(this.addres)
+        
     }
 }
 </script>
@@ -134,6 +170,15 @@ export default {
             }
             .picker {
                 flex: 1;
+            }
+            .addres {
+                height: 100%;
+                flex: 1;
+                line-height: 92rpx;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding-right: 1%;
             }
         }
     }

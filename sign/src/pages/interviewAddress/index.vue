@@ -24,7 +24,7 @@
 <script>
 import "../../../font/iconfont.css";
 import { mapState , mapActions , mapMutations } from 'vuex'
-import throttle from '@/utils/debounce'
+import { throttle } from '../../utils/debounce'
 export default {
     props:{
 
@@ -48,7 +48,7 @@ export default {
         }),
         ...mapMutations('address',['upgetAddres']),
         changInput() {
-            throttle(() => this.getSuggestion(this.changeInput), 1000);
+            this.getSuggestion(this.changeInput);
         },
         clickBtn(item) {
             this.upgetAddres(item)
@@ -58,7 +58,7 @@ export default {
         }
     },
     created(){
-        this.getSuggestion;
+        this.getSuggestion = throttle(this.getSuggestion, 1000);
     },
     mounted(){
         

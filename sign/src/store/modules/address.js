@@ -22,9 +22,11 @@ const actions = {
 
 //模块内的同步操作
 const mutations = {
+    //搜索列表
     upgetSuggestion(state,payload) {
         state.addressList = payload
     },
+    //面试地址
     upgetAddres(state,payload) {
         state.addres = payload
     }
