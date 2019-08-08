@@ -25,12 +25,10 @@ const mutations = {
     //搜索列表
     upgetSuggestion(state,payload) {
         state.addressList = payload
-        console.log(state.addressList,'addressList...')
     },
     //面试地址
     upgetAddres(state,payload) {
         state.addres = payload
-        console.log(state.addres,'addres...')
     }
 }
 

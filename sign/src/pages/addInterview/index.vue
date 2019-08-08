@@ -29,8 +29,8 @@
             </label>
             <label for="" class="input_label" @click='interviewAddress'>
                 <p>面试地址</p>
-                <div class="addres" v-show="oks">请输入地址</div>
-                <div class="addres" v-show="ok">{{addres.address}}</div>
+                <div class="addres" v-if="!addres.address">请输入地址</div>
+                <div class="addres" v-else>{{addres.address}}</div>
                 <!-- <input type="text" placeholder="请选择面试地址" :value='addres' v-model="interview"> -->
             </label>
         </section>
@@ -134,7 +134,7 @@ export default {
               return
           }
           //手机的非空
-          if(that.phone === '') {
+          if(that.phone === '' || !(/^1[3456789]\d{9}$/.test(that.phone))) {
             wx.showToast({
                     title: '请输入公司手机号',
                     icon: 'none',
@@ -155,12 +155,12 @@ export default {
           that.start_time = moment(this.dateShow).unix()*1000;
           wx.showModal({
             title: '温馨提示',
-            content: '添加面试成功',
+            content: '确定添加面试？',
             success (res) {
             if (res.confirm) {
                 let obj = {
-                    company:that.firmName,
-                    phone:that.phone,
+                    company:that.firmName, //公司名称
+                    phone:that.phone,      //公司电话
                     form_id:e.target.formId,
                     latitude:that.addres.location.lat,
                     longitude:that.addres.location.lng,
@@ -170,8 +170,6 @@ export default {
                 }
                 console.log(obj)
                 that.AddInterview(obj)
-                // console.log('用户点击确定',that.firmName)
-                // console.log(that.AddInterview(),'addInterview...')
             } else if (res.cancel) {
                 console.log('用户点击取消')
             }
@@ -235,7 +233,7 @@ export default {
             align-items: center;
             overflow: hidden;
             p {
-                color: #ccc;
+                color: #9b9b9b;
                 margin-right: 20rpx;
             }
             input {

@@ -6,8 +6,21 @@ const actions = {
     async AddInterview({commit},payload) {
         console.log(payload,'payload...')
         const data = await addInterview(payload)
-        console.log(data,'data...')
         commit('mutationsAddInterview',data)
+        console.log(data,'data...')
+        if(data.code === 0) {
+            wx.showToast({
+              title: '添加面试成功',
+              icon: 'none',
+              duration: 2000,
+              success(res){
+                wx.navigateTo({
+                    url: "/pages/myinterview/main"
+                });
+              }
+          })
+          
+        }
     }
 }
 
