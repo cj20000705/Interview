@@ -14,6 +14,8 @@ import Interview from "./modules/Interview";
 import addInterview from "./modules/addinterview"
 //数据解密
 import decrypt from './modules/user'
+//更新面试信息
+import abandon from './modules/abandonInterview'
 Vue.use(Vuex);
 
 
@@ -24,7 +26,8 @@ export default new Vuex.Store({
     mine,
     Interview,
     addInterview,
-    decrypt
+    decrypt,
+    abandon
   },
   plugins: [CreateLogger()]
 })

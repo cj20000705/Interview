@@ -22,13 +22,13 @@
     </div>
     <div class="myinterviewDetailsList">
       <span class="cancel">取消提醒:</span>
-      <view class="body-view">
-        <switch checked bindchange="switch1Change"/>
-      </view>
+      <div class="body-view">
+        <switch @change="switch1Change"/>
+      </div>
     </div>
     <div class="btns">
       <button class="leftBtns">去打卡</button>
-      <button class="rightBtns">放弃面试</button>
+      <button class="rightBtns" @click="abandons">放弃面试</button>
     </div>
   </div>
 </template>
@@ -47,8 +47,30 @@ export default {
   components: {},
   methods: {
     ...mapActions({
-      detail: "Interview/myinterviewDetail"
-    })
+      detail: "Interview/myinterviewDetail",
+      abandon: "abandon/abandonInterview"
+    }),
+    switch1Change(e){
+       console.log('switch1 发生 change 事件，携带值为', e.mp.detail.value)
+       if(e.mp.detail.value) {
+          this.abandon({id:this.detailList.id,remind:1})
+       } 
+    },
+    abandons() {
+      let that = this
+      wx.showModal({
+        title: '提示',
+        content: '这是一个模态弹窗',
+        success (res) {
+          if (res.confirm) {
+            that.abandon({id:that.detailList.id,status:1,remind:1})
+            // console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
   },
   mounted() {
     

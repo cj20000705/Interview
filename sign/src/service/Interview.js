@@ -18,3 +18,9 @@ export let signDetail = id => {
 export let addInterview = params => {
   return fly.post("/sign", params);
 };
+
+//更新面试信息
+export let abandonInterview = params => {
+  console.log(params,'params....')
+  return fly.put(`/sign/${params.id}`,params)
+}

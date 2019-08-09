@@ -31,6 +31,7 @@ const state = {
 const mutations = {
   mutationsSignDetail(state, payload) {
     state.detailList = payload;
+    console.log(state.detailList,'detailList....')
   }
 };
 //异步
