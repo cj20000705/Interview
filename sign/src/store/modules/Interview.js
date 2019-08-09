@@ -1,8 +1,8 @@
 //获取面试列表接口
 import { signList, signDetail } from "../../service";
-const moment = require('moment')
+const moment = require("moment");
 function formatTime(start_time) {
-  return moment(start_time * 1).format('YYYY-MM-DD HH:mm')
+  return moment(start_time * 1).format("YYYY-MM-DD HH:mm");
 }
 //所有模块内状态
 const state = {
@@ -41,14 +41,16 @@ const actions = {
     const data = await signList(payload);
     console.log("data====", data.data);
     data.data.map(item => {
-      item.start_time = formatTime(item.start_time)
+      item.start_time = formatTime(item.start_time);
     });
+    console.log(payload.page, "page1111");
     if (payload.page === 1) {
-      console.log(data.data,'data///////////////')
+      console.log(data.data, "data///////////////");
       state.list = data.data;
-      console.log(state.list,'state.list......')
+      console.log(state.list, "state.list......");
     } else {
       state.list = [...state.list, ...data.data];
+      console.log(state.list, "state.list22222hhhh......");
     }
   },
   async myinterviewDetail({ commit }, payload) {

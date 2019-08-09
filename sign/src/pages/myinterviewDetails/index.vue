@@ -2,7 +2,7 @@
   <div class="myinterviewDetailsWrap">
     <div class="myinterviewDetailsList">
       <span>面试地址:</span>
-      <h3>北京市朝阳区国家体育场南路1号</h3>
+      <h3>{{detailList.address}}</h3>
     </div>
     <div class="myinterviewDetailsList">
       <span>面试时间:</span>
@@ -49,7 +49,7 @@ export default {
     })
   },
   mounted() {
-    // console.log("detail----1", this.detailList);
+    console.log("detail----123", this.detailList);
   },
   onLoad(options) {
     const id = options.id;
@@ -61,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 .myinterviewDetailsWrap {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   .myinterviewDetailsList {
     width: 100%;
     height: 100rpx;
@@ -88,7 +88,7 @@ export default {
       height: 120rpx;
       text-align: center;
       line-height: 120rpx;
-      color: #fff; 
+      color: #fff;
       border: 0;
       margin-top: 50rpx;
     }

@@ -8,15 +8,20 @@
         @click="tabClass({index,status:item.status})"
       >{{item.title}}</li>
     </ul>
-    <div class="myinterviewBox">
+    <scroll-view scroll-y class="myinterviewBoxWrap" style="height: 100%">
       <div v-if="list.length>0">
-        <div v-for="(item,index) in list" :key="index" @click="myinterviewDetail(item.id)">
+        <div
+          v-for="(item,index) in list"
+          class="myinterviewBox"
+          :key="index"
+          @click="myinterviewDetail(item.id)"
+        >
           <div class="myinterviewBoxFirst">
             <h3>{{item.company}}</h3>
             <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
           </div>
           <div class="myinterviewBoxtMiddle">
-            <p>{{item.address }}</p>
+            <p>{{item.address}}</p>
           </div>
           <div class="myinterviewBoxBotton">
             <h3>面试时间:{{item.start_time}}</h3>
@@ -26,7 +31,7 @@
         </div>
       </div>
       <div v-else class="nomyinterview">当前分类还没有面试!</div>
-    </div>
+    </scroll-view>
   </div>
 </template>
 
@@ -38,8 +43,7 @@ export default {
     return {
       ind: 0,
       page: 1,
-      pageSize: 6,
-      gotoStatus: -1
+      pageSize: 6, 
     };
   },
   computed: {
@@ -73,8 +77,7 @@ export default {
     },
     tabClass(payload) {
       this.ind = payload.index;
-      this.page = 1;
-      this.gotoStatus = payload.status;
+      this.page = 1; 
       this.signList({
         status: payload.status,
         page: this.page,
@@ -86,9 +89,7 @@ export default {
   onShow() {
     this.signList({ status: -1, page: this.page, pageSize: this.pageSize });
   },
-  created() {
-    
-  },
+  created() {},
   mounted() {
     this.signList();
     console.log("list======", this.list.length);
@@ -98,8 +99,9 @@ export default {
 <style lang="scss" scoped>
 .myinterviewWrap {
   width: 100%;
-  height: auto;
+  height: 100%;
   background: #eeee;
+  overflow: hidden;
   .myinterviewLis {
     width: 100%;
     height: 88rpx;
@@ -117,17 +119,23 @@ export default {
   border-bottom: solid 1px skyblue;
   color: skyblue;
 }
-.myinterviewBox {
+.myinterviewBoxWrap {
   width: 100%;
-  height: 300rpx;
-  background: #fff;
-  margin-top: 20rpx;
-  .nomyinterview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .myinterviewBox {
     width: 100%;
-    height: 100%;
+    height: 300rpx;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin-top: 20rpx;
+    .nomyinterview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 .myinterviewBoxFirst {
