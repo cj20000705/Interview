@@ -43,7 +43,7 @@ export default {
     return {
       ind: 0,
       page: 1,
-      pageSize: 6, 
+      pageSize: 6
     };
   },
   computed: {
@@ -77,7 +77,7 @@ export default {
     },
     tabClass(payload) {
       this.ind = payload.index;
-      this.page = 1; 
+      this.page = 1;
       this.signList({
         status: payload.status,
         page: this.page,
