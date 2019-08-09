@@ -4,7 +4,7 @@
       <div class="mineTx">
         <span class="icon iconfont tx">&#xe678;</span>
       </div>
-      <div class="mainTel">159***7149</div>
+      <div class="mainTel">{{phone}}</div>
     </div>
     <div class="mineList">
       <div class="mineListDls" @click="myinterviews">
@@ -28,10 +28,15 @@
 
 <script>
 import "../../../font/iconfont.css";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions ,mapMutations } from "vuex";
 export default {
   data() {
     return {};
+  },
+  computed: {
+      ...mapState({
+        phone: state => state.decrypt.phone
+      })
   },
   components: {},
   methods: {

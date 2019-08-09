@@ -2,6 +2,7 @@ import fly from "@/utils/request";
 
 // 获取面试列表
 export let signList = payload => { 
+  console.log(payload,'payload...5')
   //全部
   if (payload.status === 2) { 
     return fly.get("/sign", { page: payload.page, pageSize: payload.pageSize });

@@ -16,6 +16,7 @@
       <span class="icon iconfont">&#xe678;</span>
     </div>
     <div class="addInterview" @click="gotoAddinterview">添加面试</div>
+    <button v-show="code !==0"  class="authorization" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" >授权</button>
   </div>
 </template>
 
@@ -30,14 +31,16 @@ export default {
   computed: {
     ...mapState({
       longitude: state => state.home.longitude,
-      latitude: state => state.home.latitude
+      latitude: state => state.home.latitude,
+      code: state => state.decrypt.code
     })
   },
   components: {},
   methods: {
     ...mapActions({
       location: "home/getLocation",
-      getSuggestion: "mine/getSuggestion"
+      getSuggestion: "mine/getSuggestion",
+      decrypt:"decrypt/getDecrypt"
     }),
     ...mapMutations(["updateLocation"]),
     gotoMine() {
@@ -49,10 +52,14 @@ export default {
       wx.navigateTo({
         url: "/pages/addInterview/main"
       });
+    },
+    //获取手机号
+    getPhoneNumber (e) {
+      this.decrypt({encryptedData:e.target.encryptedData,iv:e.target.iv})
     }
   },
   mounted() {
-    this.getSuggestion("八维");
+     
   },
   created() {}
 };
@@ -105,6 +112,13 @@ map {
     color: steelblue;
     font-weight: 700;
   }
+}
+.authorization {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 </style>
  

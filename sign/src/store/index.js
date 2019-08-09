@@ -12,6 +12,8 @@ import mine from "./modules/mine";
 import Interview from "./modules/Interview";
 //添加面试
 import addInterview from "./modules/addinterview"
+//数据解密
+import decrypt from './modules/user'
 Vue.use(Vuex);
 
 
@@ -21,7 +23,8 @@ export default new Vuex.Store({
     address,
     mine,
     Interview,
-    addInterview
+    addInterview,
+    decrypt
   },
   plugins: [CreateLogger()]
 })

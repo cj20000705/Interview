@@ -21,8 +21,10 @@
       <h3>未开始</h3>
     </div>
     <div class="myinterviewDetailsList">
-      <span>取消提醒:</span>
-      <h3>开关</h3>
+      <span class="cancel">取消提醒:</span>
+      <view class="body-view">
+        <switch checked bindchange="switch1Change"/>
+      </view>
     </div>
     <div class="btns">
       <button class="leftBtns">去打卡</button>
@@ -49,12 +51,10 @@ export default {
     })
   },
   mounted() {
-    let that = this
-    console.log("detail----1", that.detailList);
+    
   },
   onLoad(options) {
     const id = options.id;
-    console.log(id,'id....')
     this.detail(id);
   },
   created() {}
@@ -101,5 +101,8 @@ export default {
       background: #dc4e42;
     }
   }
+}
+.cancel {
+  margin-right: 40rpx;
 }
 </style>

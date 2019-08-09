@@ -92,7 +92,6 @@ export default {
   created() {},
   mounted() {
     this.signList();
-    console.log("list======", this.list.length);
   }
 };
 </script>

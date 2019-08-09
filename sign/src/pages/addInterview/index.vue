@@ -168,7 +168,6 @@ export default {
                     address:that.addres.address,
                     start_time:moment(that.dateShow).unix()*1000
                 }
-                console.log(obj)
                 that.AddInterview(obj)
             } else if (res.cancel) {
                 console.log('用户点击取消')
