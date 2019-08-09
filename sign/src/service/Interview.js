@@ -4,7 +4,7 @@ import fly from "@/utils/request";
 export let signList = payload => { 
   console.log(payload,'payload...5')
   //全部
-  if (payload.status === 2) { 
+  if (payload.status === 2) {
     return fly.get("/sign", { page: payload.page, pageSize: payload.pageSize });
   } else {
     return fly.get("/sign", payload);
