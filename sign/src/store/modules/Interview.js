@@ -30,6 +30,7 @@ const state = {
 //同步
 const mutations = {
   mutationsSignDetail(state, payload) {
+    payload.start_time = formatTime(payload.start_time);
     state.detailList = payload;
     console.log(state.detailList,'detailList....')
   }

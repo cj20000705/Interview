@@ -18,15 +18,15 @@
     </div>
     <div class="myinterviewDetailsList">
       <span>面试状态:</span>
-      <h3>未开始</h3>
+      <h3>{{status}}</h3>
     </div>
-    <div class="myinterviewDetailsList">
+    <div class="myinterviewDetailsList" v-if="detailList.status !== 1">
       <span class="cancel">取消提醒:</span>
       <div class="body-view">
         <switch @change="switch1Change"/>
       </div>
     </div>
-    <div class="btns">
+    <div class="btns" v-if="detailList.status !== 1">
       <button class="leftBtns">去打卡</button>
       <button class="rightBtns" @click="abandons">放弃面试</button>
     </div>
@@ -42,7 +42,18 @@ export default {
   computed: {
     ...mapState({
       detailList: state => state.Interview.detailList
-    })
+    }),
+    status(){
+      let str='';
+      if(this.detailList.status === -1){
+        str = '未开始'
+      }else if(this.detailList.status === 0){
+        str = '已打卡'
+      }else{
+        str = '已放弃'
+      }
+      return str
+    }
   },
   components: {},
   methods: {
@@ -60,11 +71,10 @@ export default {
       let that = this
       wx.showModal({
         title: '提示',
-        content: '这是一个模态弹窗',
+        content: '确定要放弃面试吗？',
         success (res) {
           if (res.confirm) {
             that.abandon({id:that.detailList.id,status:1,remind:1})
-            // console.log('用户点击确定')
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
