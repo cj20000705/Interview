@@ -6,7 +6,7 @@
     </div>
     <div class="myinterviewDetailsList">
       <span>面试时间:</span>
-      <h3>{{detailList.start_time}}</h3>
+      <h3>{{timeS}}</h3>
     </div>
     <div class="myinterviewDetailsList">
       <span>联系方式:</span>
@@ -22,7 +22,9 @@
     </div>
     <div class="myinterviewDetailsList">
       <span>取消提醒:</span>
-      <h3>开关</h3>
+      <h3>
+        <switch name="switch" :checked="detailList.remind===1" @change="switchChange" />
+      </h3>
     </div>
     <div class="btns">
       <button class="leftBtns">去打卡</button>
@@ -33,31 +35,47 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+const moment = require("moment");
+function formatTime(start_time) {
+  return moment(start_time * 1).format("YYYY-MM-DD HH:mm");
+}
 export default {
   data() {
     return {};
   },
   computed: {
     ...mapState({
-      detailList: state => state.Interview.detailList
-    })
+      detailList: state => state.Interview.detailList,
+      id: state => state.Interview.id
+    }),
+    timeS() {
+      return (this.detailList.start_time = formatTime(
+        this.detailList.start_time
+      ));
+    }
   },
-  components: {},
   methods: {
     ...mapActions({
-      detail: "Interview/myinterviewDetail"
-    })
+      detail: "Interview/myinterviewDetail",
+      getupdateInterview: "Interview/getupdateInterview"
+    }),
+    async switchChange(e) {
+      // getupdateInterview
+      const data = await this.getupdateInterview({
+        id: this.id,
+        params: { remind: e.target.value ? 1 : -1 }
+      });
+    }
   },
   mounted() {
-    let that = this
+    let that = this;
     console.log("detail----1", that.detailList);
   },
   onLoad(options) {
     const id = options.id;
-    console.log(id,'id....')
+    console.log(id, "id....");
     this.detail(id);
-  },
-  created() {}
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -73,6 +91,9 @@ export default {
     border-bottom: solid 2rpx #ccc;
     line-height: 100rpx;
     font-size: 32rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     span {
       color: #666;
     }
