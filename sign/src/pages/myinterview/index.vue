@@ -8,7 +8,7 @@
         @click="tabClass({index,status:item.status})"
       >{{item.title}}</li>
     </ul>
-    <div class="myinterviewBox">
+    <scroll-view scroll-y class="myinterviewBox" style="height:100%">
       <div v-if="list.length>0">
         <div v-for="(item,index) in list" :key="index" @click="myinterviewDetail(item.id)">
           <div class="myinterviewBoxFirst">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div v-else class="nomyinterview">当前分类还没有面试!</div>
-    </div>
+    </scroll-view>
   </div>
 </template>
 
@@ -98,8 +98,9 @@ export default {
 <style lang="scss" scoped>
 .myinterviewWrap {
   width: 100%;
-  height: auto;
+  height: 100%;
   background: #eeee;
+  overflow: hidden;
   .myinterviewLis {
     width: 100%;
     height: 88rpx;
@@ -119,7 +120,7 @@ export default {
 }
 .myinterviewBox {
   width: 100%;
-  height: 300rpx;
+  height: auto;
   background: #fff;
   margin-top: 20rpx;
   .nomyinterview {
