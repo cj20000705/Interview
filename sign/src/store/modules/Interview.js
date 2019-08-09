@@ -39,14 +39,11 @@ const actions = {
   // 获取面试列表
   async getsignList({ commit }, payload) {
     const data = await signList(payload);
-    console.log("data====", data.data);
     data.data.map(item => {
       item.start_time = formatTime(item.start_time)
     });
     if (payload.page === 1) {
-      console.log(data.data,'data///////////////')
       state.list = data.data;
-      console.log(state.list,'state.list......')
     } else {
       state.list = [...state.list, ...data.data];
     }
