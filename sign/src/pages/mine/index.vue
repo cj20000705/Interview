@@ -46,7 +46,16 @@ export default {
       });
     }
   },
-  created() {}
+  created() {
+    wx.startSoterAuthentication({
+      requestAuthModes: ['fingerPrint'],
+      challenge: '123456',
+      authContent: '请用指纹解锁',
+      success(res) {
+        
+      }
+    })
+  }
 };
 </script>
 <style lang="scss" scoped>

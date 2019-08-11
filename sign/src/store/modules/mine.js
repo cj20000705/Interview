@@ -17,7 +17,7 @@ const actions = {
     qqMapSdk.getSuggestion({
       keyword: payload,
       success: res => {
-        console.log("111res", res);
+        
       }
     });
   }

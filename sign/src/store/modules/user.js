@@ -12,7 +12,6 @@ const state = {
 const actions = {
     async getDecrypt({commit},payload) {
         const data = await decrypt(payload)
-        console.log(data,'data....')
         commit('upPhone',data)
     }
 }

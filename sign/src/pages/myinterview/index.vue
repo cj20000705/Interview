@@ -8,30 +8,30 @@
         @click="tabClass({index,status:item.status})"
       >{{item.title}}</li>
     </ul>
-    <scroll-view scroll-y class="myinterviewBoxWrap" style="height: 100%">
-      <div v-if="list.length>0">
-        <div
-          v-for="(item,index) in list"
-          class="myinterviewBox"
-          :key="index"
-          @click="myinterviewDetail(item.id)"
-        >
-          <div class="myinterviewBoxFirst">
-            <h3>{{item.company}}</h3>
-            <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
-          </div>
-          <div class="myinterviewBoxtMiddle">
-            <p>{{item.address}}</p>
-          </div>
-          <div class="myinterviewBoxBotton">
-            <h3>面试时间:{{item.start_time}}</h3>
-            <!-- -1表示未提醒，0表示已提醒 -->
-            <span :class="{grays:item.status === 1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
+      <scroll-view scroll-y class="myinterviewBoxWrap" style="height: 100%">
+        <div v-if="list.length>0">
+          <div
+            v-for="(item,index) in list"
+            class="myinterviewBox"
+            :key="index"
+            @click="myinterviewDetail(item.id)"
+          >
+            <div class="myinterviewBoxFirst">
+              <h3>{{item.company}}</h3>
+              <span :class="{blues:item.status===0,pinks:item.status===1}">{{status}}</span>
+            </div>
+            <div class="myinterviewBoxtMiddle">
+              <p>{{item.address}}</p>
+            </div>
+            <div class="myinterviewBoxBotton">
+              <h3>面试时间:{{item.start_time}}</h3>
+              <!-- -1表示未提醒，0表示已提醒 -->
+              <span :class="{grays:item.status === 1}">{{item.remind === -1 ? "未提醒" : "已提醒"}}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div v-else class="nomyinterview">当前分类还没有面试!</div>
-    </scroll-view>
+        <div v-else class="nomyinterview">当前分类还没有面试!</div>
+      </scroll-view>
   </div>
 </template>
 
@@ -72,7 +72,6 @@ export default {
     }),
     myinterviewDetail: id => {
       const url = "/pages/myinterviewDetails/main?id=" + id;
-      console.log(url);
       mpvue.navigateTo({ url });
     },
     tabClass(payload) {
@@ -122,7 +121,7 @@ export default {
   width: 100%;
   .myinterviewBox {
     width: 100%;
-    height: 300rpx;
+    height: 320rpx;
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -172,8 +171,15 @@ export default {
 .myinterviewBoxtMiddle {
   font-size: 34rpx;
   color: #9d93b1;
-  padding-left: 20rpx;
+  padding: 20rpx;
   box-sizing: border-box;
+  p {
+    width: 100%;
+    padding-right: 20rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 .myinterviewBoxBotton {
   padding: 0 20rpx;

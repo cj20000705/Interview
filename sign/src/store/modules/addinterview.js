@@ -4,10 +4,8 @@ const state = {
 }
 const actions = {
     async AddInterview({commit},payload) {
-        console.log(payload,'payload...')
         const data = await addInterview(payload)
         commit('mutationsAddInterview',data)
-        console.log(data,'data...')
         if(data.code === 0) {
             wx.showToast({
               title: '添加面试成功',

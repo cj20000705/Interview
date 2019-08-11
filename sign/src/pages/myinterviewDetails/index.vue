@@ -14,7 +14,7 @@
     </div>
     <div class="myinterviewDetailsList">
       <span>是否提醒:</span>
-      <h3>未提醒</h3>
+      <h3>{{remind}}</h3>
     </div>
     <div class="myinterviewDetailsList">
       <span>面试状态:</span>
@@ -41,7 +41,9 @@ function formatTime(start_time) {
 }
 export default {
   data() {
-    return {};
+    return {
+       remind:'未提醒'
+    };
   },
   computed: {
     ...mapState({
@@ -68,7 +70,10 @@ export default {
        console.log('switch1 发生 change 事件，携带值为', e.mp.detail.value)
        if(e.mp.detail.value) {
           this.abandon({id:this.detailList.id,remind:1})
-       } 
+          this.remind = '以提醒'
+       } else {
+          this.remind = '未提醒'
+       }
     },
     abandons() {
       let that = this
@@ -116,6 +121,9 @@ export default {
     h3 {
       color: #333;
       margin-left: 40rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
   .btns {
