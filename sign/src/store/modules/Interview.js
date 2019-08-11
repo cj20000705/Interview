@@ -39,24 +39,26 @@ const actions = {
   // 获取面试列表
   async getsignList({ commit }, payload) {
     const data = await signList(payload);
+    // console.log(data,'data...............')  
     data.data.map(item => {
       item.start_time = formatTime(item.start_time);
     });
-    if (payload.page === 1) {
+    if (payload.status === 2) {
       state.list = data.data;
+    } else if(payload.status === -1) {
+      state.list = data.data;
+    } else if(payload.status === 1) {
+      state.list = data.data
     } else {
-      state.list = [...state.list, ...data.data];
+      state.list = data.data
     }
   },
   async myinterviewDetail({ commit }, payload) {
-    console.log(payload,'payload....52')
     const data = await signDetail(payload);
     commit("mutationsSignDetail", data.data);
   },
   async abandonInterview({commit,dispatch},payload) {
-    console.log(payload,'payload..............')
     const data = await abandonInterview(payload)
-    console.log(data,'data...')
     if(data.code === 0) {
        await dispatch('myinterviewDetail',payload.id)
     }

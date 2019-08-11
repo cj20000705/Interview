@@ -43,7 +43,7 @@ export default {
     return {
       ind: 0,
       page: 1,
-      pageSize: 6
+      pageSize: 1000
     };
   },
   computed: {
@@ -75,12 +75,13 @@ export default {
       mpvue.navigateTo({ url });
     },
     tabClass(payload) {
+      console.log(this.list,'lis.r...........')
       this.ind = payload.index;
       this.page = 1;
       this.signList({
         status: payload.status,
         page: this.page,
-        pageSize: this.pageSize
+        pageSize: this.pageSize,
       });
     }
   },
