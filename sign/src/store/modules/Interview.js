@@ -1,5 +1,5 @@
 //获取面试列表接口
-import { signList, signDetail } from "../../service";
+import { signList, signDetail , abandonInterview } from "../../service";
 const moment = require("moment");
 function formatTime(start_time) {
   return moment(start_time * 1).format("YYYY-MM-DD HH:mm");
@@ -49,8 +49,18 @@ const actions = {
     }
   },
   async myinterviewDetail({ commit }, payload) {
+    console.log(payload,'payload....52')
     const data = await signDetail(payload);
     commit("mutationsSignDetail", data.data);
+  },
+  async abandonInterview({commit,dispatch},payload) {
+    console.log(payload,'payload..............')
+    const data = await abandonInterview(payload)
+    console.log(data,'data...')
+    if(data.code === 0) {
+       await dispatch('myinterviewDetail',payload.id)
+    }
+    // commit('upCode',payload)
   }
 };
 

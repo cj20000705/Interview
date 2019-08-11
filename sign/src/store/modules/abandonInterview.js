@@ -3,12 +3,12 @@ const state = {
     // code:'1'
 }
 const actions = {
-    async abandonInterview({commit},payload) {
-        console.log(payload,'payload..............')
-        const data = await abandonInterview(payload)
-        console.log(data,'data...')
-        // commit('upCode',payload)
-    }
+    // async abandonInterview({commit},payload) {
+    //     console.log(payload,'payload..............')
+    //     const data = await abandonInterview(payload)
+    //     console.log(data,'data...')
+    //     // commit('upCode',payload)
+    // }
 }
 const mutations = {
     // upCode(state,payload) {

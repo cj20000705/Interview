@@ -64,7 +64,7 @@ export default {
   methods: {
     ...mapActions({
       detail: "Interview/myinterviewDetail",
-      abandon: "abandon/abandonInterview"
+      abandon: "Interview/abandonInterview"
     }),
     switch1Change(e){
        console.log('switch1 发生 change 事件，携带值为', e.mp.detail.value)
