@@ -8,8 +8,8 @@
         @click="tabClass({index,status:item.status})"
       >{{item.title}}</li>
     </ul>
-      <scroll-view scroll-y class="myinterviewBoxWrap" style="height: 100%">
-        <div v-if="list.length>0">
+      <!-- <scroll-view scroll-y class="myinterviewBoxWrap" style="height: 100%"> -->
+        <div v-if="list.length>0" class="myinterviewBoxWrap">
           <div
             v-for="(item,index) in list"
             class="myinterviewBox"
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div v-else class="nomyinterview">当前分类还没有面试!</div>
-      </scroll-view>
+      <!-- </scroll-view> -->
   </div>
 </template>
 
@@ -83,6 +83,12 @@ export default {
         page: this.page,
         pageSize: this.pageSize,
       });
+    },
+    onReachBottom() {
+      console.log('00909090909090')
+       wx.showLoading({
+        title: '玩命加载中',
+      })
     }
   },
   //刚进来页面的显示
@@ -101,6 +107,8 @@ export default {
   height: 100%;
   background: #eeee;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   .myinterviewLis {
     width: 100%;
     height: 88rpx;
@@ -119,7 +127,8 @@ export default {
   color: skyblue;
 }
 .myinterviewBoxWrap {
-  width: 100%;
+  flex: 1;
+  overflow-y: scroll;
   .myinterviewBox {
     width: 100%;
     height: 320rpx;

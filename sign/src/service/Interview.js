@@ -6,7 +6,7 @@ export let signList = payload => {
   //全部
   if (payload.status === 2) {
     // return fly.get("/sign", { page: payload.page, pageSize: payload.pageSize });
-    return fly.get("/sign", {page:payload.page,pageSize:1000});
+    return fly.get("/sign", {page:payload.page,pageSize:payload.pageSize});
   } else {
     return fly.get("/sign", payload);
   }
